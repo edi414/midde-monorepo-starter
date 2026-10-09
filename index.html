@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sua landing page</title>
+<meta name="description" content="Página de exemplo. Troque este conteúdo pelo seu com o comando /nova-landing.">
+
+<!-- As cores, a fonte e as formas vêm todas daqui. Para colocar a identidade
+     da sua empresa, digite /design-system no Claude Code: ele preenche este
+     arquivo e a página inteira acompanha sozinha. -->
+<link rel="stylesheet" href="design-system/tokens.css">
+
+<style>
+  /* Só o arranjo desta página. Nenhuma cor, fonte ou forma é escolhida aqui:
+     tudo vem dos tokens. É isso que faz trocar a marca ser uma linha, e não
+     uma caçada por hex espalhado pelo arquivo. */
+
+  .faixa { max-width: var(--largura-max); margin: 0 auto; padding-inline: var(--esp-5); }
+
+  .topo { background: var(--fundo-escuro); color: var(--texto-claro); padding-block: var(--esp-9) var(--esp-8); }
+  .topo h1 { color: var(--texto-claro); }
+  .topo .chamada { color: var(--texto-claro); opacity: .78; font-size: var(--texto-lg); max-width: 56ch; }
+
+  .botao {
+    display: inline-block; background: var(--acao); color: var(--texto-na-acao);
+    text-decoration: none; font-weight: 600;
+    padding: var(--esp-3) var(--esp-6); border-radius: var(--raio-md);
+    transition: background 140ms ease;
+  }
+  .botao:hover { background: var(--acao-hover); }
+
+  .secao { padding-block: var(--esp-8); }
+
+  .motivos { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--esp-4); }
+  .motivo {
+    background: var(--fundo-cartao); border: 1px solid var(--borda);
+    border-radius: var(--raio-md); padding: var(--esp-5);
+  }
+  .motivo p { margin: 0; color: var(--texto-suave); font-size: var(--texto-sm); }
+
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--esp-5); margin-top: var(--esp-6); }
+  .numero-valor { font-size: var(--texto-2xl); font-weight: 700; line-height: 1.1; color: var(--acao); }
+  .numero-rotulo { font-size: var(--texto-sm); color: var(--texto-suave); }
+
+  .fecho {
+    background: var(--fundo-suave); border: 1px solid var(--borda);
+    border-radius: var(--raio-lg); padding: var(--esp-7) var(--esp-5); text-align: center;
+  }
+  .fecho p { margin-left: auto; margin-right: auto; }
+
+  .rodape { border-top: 1px solid var(--borda); padding-block: var(--esp-6) var(--esp-8); }
+  .rodape p { color: var(--texto-suave); font-size: var(--texto-sm); margin: 0; }
+
+  /* Aparece com fade ao entrar na tela. Se o JS não rodar, o conteúdo
+     aparece mesmo assim: nada aqui depende de JS para ser lido. */
+  [data-aparece] { opacity: 0; transform: translateY(8px); transition: opacity .45s ease, transform .45s ease; }
+  [data-aparece].visivel { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { [data-aparece] { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+  <header class="topo">
+    <div class="faixa">
+      <p class="t-etiqueta">Nome da sua empresa</p>
+      <h1>Esta é a sua landing page. Ela já está pronta para ir ao ar.</h1>
+      <p class="chamada">
+        Troque este texto pelo seu. No Claude Code, digite <strong>/nova-landing</strong> e responda
+        as perguntas: o que você vende, para quem, e qual ação a pessoa deve tomar.
+      </p>
+      <p><a class="botao" href="#contato">Falar com a gente</a></p>
+    </div>
+  </header>
+
+  <main>
+    <section class="secao">
+      <div class="faixa">
+        <h2>Por que alguém deveria acreditar em você</h2>
+        <div class="motivos">
+          <article class="motivo" data-aparece data-atraso="0">
+            <h3>Primeiro motivo</h3>
+            <p>Use um fato concreto, com número quando existir. Adjetivo não convence ninguém.</p>
+          </article>
+          <article class="motivo" data-aparece data-atraso="120">
+            <h3>Segundo motivo</h3>
+            <p>Algo que você já entregou de verdade. Prova real vale mais que promessa.</p>
+          </article>
+          <article class="motivo" data-aparece data-atraso="240">
+            <h3>Terceiro motivo</h3>
+            <p>O que só você faz, ou faz diferente de quem a pessoa já conhece.</p>
+          </article>
+        </div>
+
+        <!-- Números que sobem sozinhos quando aparecem na tela. Troque os
+             valores de data-count pelos seus. Veja mais blocos assim, prontos
+             para copiar, abrindo blocos/index.html. -->
+        <div class="numeros">
+          <div>
+            <div class="numero-valor" data-count="2138">0</div>
+            <div class="numero-rotulo">clientes atendidos</div>
+          </div>
+          <div>
+            <div class="numero-valor" data-count="12" data-suffix=" anos">0</div>
+            <div class="numero-rotulo">de mercado</div>
+          </div>
+          <div>
+            <div class="numero-valor" data-count="98" data-suffix="%">0</div>
+            <div class="numero-rotulo">voltariam a comprar</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="secao" id="contato">
+      <div class="faixa">
+        <div class="fecho">
+          <h2>Pronto para publicar?</h2>
+          <p>No Claude Code, digite <strong>/deploy</strong>. Ele mostra uma prévia antes de ir ao ar.</p>
+          <p><a class="botao" href="#">Trocar por um link real</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="faixa">
+      <p>
+        Página de exemplo. Veja <strong>guias/01-primeiro-deploy.md</strong> para colocar no ar, e
+        <strong>blocos/index.html</strong> para os blocos prontos.
+      </p>
+    </div>
+  </footer>
+
+<script>
+(function () {
+  var semMovimento = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Números que sobem de 0 até o valor de data-count ao entrar na tela. */
+  document.querySelectorAll("[data-count]").forEach(function (el) {
+    var alvo = parseFloat(el.getAttribute("data-count"));
+    var casas = parseInt(el.getAttribute("data-decimals") || "0", 10);
+    var sufixo = el.getAttribute("data-suffix") || "";
+    function escreve(v) {
+      el.textContent = (casas > 0
+        ? v.toFixed(casas).replace(".", ",")
+        : Math.round(v).toLocaleString("pt-BR")) + sufixo;
+    }
+    if (semMovimento) { escreve(alvo); return; }
+    var inicio = null;
+    function passo(ts) {
+      if (!inicio) inicio = ts;
+      var p = Math.min((ts - inicio) / 1400, 1);
+      escreve(alvo * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(passo);
+    }
+    var obs = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { requestAnimationFrame(passo); obs.disconnect(); }
+      });
+    }, { threshold: .4 });
+    obs.observe(el);
+  });
+
+  /* Entra com fade ao chegar na tela. data-atraso escalona os irmãos. */
+  var alvos = document.querySelectorAll("[data-aparece]");
+  if (semMovimento) {
+    alvos.forEach(function (el) { el.classList.add("visivel"); });
+  } else {
+    var obs2 = new IntersectionObserver(function (es, o) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var atraso = parseInt(e.target.getAttribute("data-atraso") || "0", 10);
+        setTimeout(function () { e.target.classList.add("visivel"); }, atraso);
+        o.unobserve(e.target);
+      });
+    }, { threshold: .15 });
+    alvos.forEach(function (el) { obs2.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>

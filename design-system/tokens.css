@@ -1,0 +1,242 @@
+/* =============================================================================
+   TOKENS DA SUA MARCA
+
+   ATENÇÃO: este arquivo está com valores PROVISÓRIOS, em tons de cinza.
+   Ele não é a sua marca ainda.
+
+   Para preencher com a identidade da sua empresa, digite no Claude Code:
+
+       /design-system
+
+   Ele vai perguntar o que você tem (um guia de identidade, o site no ar, um
+   print da logo, ou nada) e preencher este arquivo. Não edite à mão: o
+   comando também escreve o IDENTIDADE.md registrando de onde veio cada valor,
+   e editar aqui direto faz os dois arquivos discordarem.
+
+   COMO ESTE ARQUIVO É ORGANIZADO
+
+   1. Primitivos    as cores cruas, em escala. Ninguém usa direto.
+   2. Semânticos    o que cada cor SIGNIFICA (fundo, texto, borda, ação).
+                    É isso que você usa na página.
+   3. Papéis de texto  tamanho e peso de cada nível de título.
+
+   A vantagem de separar: trocar a cor da marca mexe em 1 linha dos
+   primitivos, e a página inteira acompanha.
+   ============================================================================= */
+
+:root {
+  /* ---------------------------------------------------------------------------
+     1. PRIMITIVOS
+     Escala de 50 (mais claro) a 950 (mais escuro). O 500 costuma ser a cor
+     "cheia" da marca, a que aparece em botão.
+     --------------------------------------------------------------------------- */
+
+  /* Cor da marca. PROVISÓRIA: cinza neutro até o /design-system rodar. */
+  --marca-50:  #f6f6f7;
+  --marca-100: #e9eaec;
+  --marca-200: #d2d4d8;
+  --marca-300: #adb1b8;
+  --marca-400: #7f848e;
+  --marca-500: #5c626d;   /* cor cheia, preenchimento de botão */
+  --marca-600: #474c55;
+  --marca-700: #383c43;
+  --marca-800: #2b2e34;
+  --marca-900: #1c1e22;
+  --marca-950: #101114;
+
+  /* Neutros. Servem para fundo, texto e borda. */
+  --neutro-0:   #ffffff;
+  --neutro-50:  #fafafa;
+  --neutro-100: #f2f2f3;
+  --neutro-200: #e4e4e7;
+  --neutro-300: #c9c9cf;
+  --neutro-500: #71717a;
+  --neutro-700: #3f3f46;
+  --neutro-900: #18181b;
+
+  /* Cores de sinal. Só para status, nunca para decorar. */
+  --ok-500:      #1f9d55;
+  --atencao-500: #c2870b;
+  --erro-500:    #c0392b;
+
+  /* ---------------------------------------------------------------------------
+     2. SEMÂNTICOS
+     Use SEMPRE estes na página, nunca os primitivos acima e nunca um hex solto.
+     Assim a página inteira muda junto quando a marca mudar.
+     --------------------------------------------------------------------------- */
+
+  --fundo:          var(--neutro-50);   /* fundo da página */
+  --fundo-cartao:   var(--neutro-0);    /* fundo de cartão sobre a página */
+  --fundo-escuro:   var(--marca-950);   /* faixas escuras, topo, rodapé */
+  --fundo-suave:    var(--marca-50);    /* destaque leve, sem virar cartão */
+
+  --texto:          var(--neutro-900);  /* texto principal */
+  --texto-suave:    var(--neutro-500);  /* apoio, legenda */
+  --texto-claro:    var(--neutro-100);  /* texto sobre fundo escuro */
+  --texto-na-acao:  var(--neutro-0);    /* texto dentro do botão */
+
+  --borda:          var(--neutro-200);
+  --borda-forte:    var(--neutro-300);
+
+  --acao:           var(--marca-500);   /* botão principal */
+  --acao-hover:     var(--marca-600);   /* o mesmo botão, com o mouse em cima */
+  --acao-foco:      var(--marca-300);   /* anel de foco, para quem navega por teclado */
+
+  /* ---------------------------------------------------------------------------
+     3. FORMA E ESPAÇO
+     --------------------------------------------------------------------------- */
+
+  /* Cantos arredondados. Marca discreta usa valores baixos; marca expressiva
+     usa valores altos. O /design-system ajusta conforme a sua identidade. */
+  --raio-sm: 4px;
+  --raio-md: 8px;
+  --raio-lg: 12px;
+  --raio-pill: 999px;   /* botão em formato de cápsula */
+
+  /* Espaçamento em grade de 4px. Usar só estes valores mantém o ritmo da
+     página; números soltos (13px, 27px) são o que faz a página parecer torta. */
+  --esp-1: 4px;
+  --esp-2: 8px;
+  --esp-3: 12px;
+  --esp-4: 16px;
+  --esp-5: 24px;
+  --esp-6: 32px;
+  --esp-7: 48px;
+  --esp-8: 64px;
+  --esp-9: 96px;
+
+  /* Sombras. Prefira borda a sombra: sombra pesada envelhece a página. */
+  --sombra-sm: 0 1px 3px rgba(0,0,0,.07);
+  --sombra-md: 0 4px 16px rgba(0,0,0,.09);
+
+  --largura-max: 1120px;   /* largura do conteúdo antes de centralizar */
+
+  /* ---------------------------------------------------------------------------
+     4. TIPOGRAFIA
+     --------------------------------------------------------------------------- */
+
+  /* PROVISÓRIA: fonte do sistema, até o /design-system definir a da marca.
+     A fonte do sistema é rápida e nunca falha, mas não tem personalidade. */
+  --fonte: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --fonte-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Escala de tamanho. Cada degrau é visivelmente diferente do anterior:
+     escala com degraus pequenos demais lê como erro, não como hierarquia. */
+  --texto-xs:   12px;
+  --texto-sm:   14px;
+  --texto-base: 16px;
+  --texto-lg:   19px;
+  --texto-xl:   24px;
+  --texto-2xl:  30px;
+  --texto-3xl:  38px;
+  --texto-4xl:  48px;
+
+  --altura-apertada: 1.15;
+  --altura-normal:   1.6;
+}
+
+/* Modo escuro, quando a pessoa usa o sistema em escuro.
+   Só os semânticos mudam: os primitivos continuam os mesmos. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    --fundo:        var(--marca-950);
+    --fundo-cartao: var(--marca-900);
+    --fundo-suave:  var(--marca-800);
+    --texto:        var(--neutro-100);
+    --texto-suave:  var(--neutro-300);
+    --borda:        var(--marca-800);
+    --borda-forte:  var(--marca-700);
+  }
+}
+
+/* =============================================================================
+   PAPÉIS DE TEXTO
+
+   Cada papel está colado no elemento HTML correspondente. Ou seja: escrever
+   <h2> já sai com o tamanho e o peso certos, sem você precisar saber de classe
+   nenhuma. As classes .t-* existem só para quando você precisar do visual de
+   um título num elemento que não é título.
+   ============================================================================= */
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte);
+  font-size: var(--texto-base);
+  line-height: var(--altura-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+.t-hero, h1 {
+  font-size: clamp(var(--texto-3xl), 6vw, var(--texto-4xl));
+  line-height: var(--altura-apertada);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0 0 var(--esp-4);
+}
+
+.t-h2, h2 {
+  font-size: clamp(var(--texto-xl), 3.4vw, var(--texto-2xl));
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin: 0 0 var(--esp-3);
+}
+
+.t-h3, h3 {
+  font-size: var(--texto-lg);
+  line-height: 1.35;
+  font-weight: 600;
+  margin: 0 0 var(--esp-2);
+}
+
+.t-corpo, p {
+  font-size: var(--texto-base);
+  line-height: var(--altura-normal);
+  margin: 0 0 var(--esp-4);
+  max-width: 68ch;   /* linha longa demais cansa de ler */
+}
+
+.t-apoio {
+  font-size: var(--texto-sm);
+  color: var(--texto-suave);
+}
+
+.t-etiqueta {
+  font-size: var(--texto-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.t-mono {
+  font-family: var(--fonte-mono);
+  font-size: 0.92em;
+}
+
+/* Foco visível para quem navega por teclado. Não remova: sem isso, quem não
+   usa mouse não consegue saber onde está na página. */
+:focus-visible {
+  outline: 2px solid var(--acao-foco);
+  outline-offset: 2px;
+}
+
+/* Números que sobem animados não podem "pular" de largura enquanto contam. */
+[data-count] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Respeita quem pediu menos movimento no sistema operacional.
+   Não remova: para algumas pessoas, animação causa enjoo de verdade. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

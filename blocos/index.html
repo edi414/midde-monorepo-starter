@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blocos prontos</title>
+<link rel="stylesheet" href="../design-system/tokens.css">
+<style>
+  /* ===========================================================================
+     Estilo só desta página de catálogo. Não é para copiar.
+     O que você copia são os blocos marcados com <!-- BLOCO: nome -->
+     =========================================================================== */
+  .cat-wrap { max-width: var(--largura-max); margin: 0 auto; padding-inline: var(--esp-5); }
+  .cat-top { padding-block: var(--esp-8) var(--esp-6); border-bottom: 1px solid var(--borda); }
+  .cat-item { padding-block: var(--esp-8); border-bottom: 1px solid var(--borda); }
+  .cat-meta { margin-bottom: var(--esp-5); }
+  .cat-use {
+    display: inline-block; font-size: var(--texto-sm); color: var(--texto-suave);
+    border-left: 3px solid var(--acao); padding-left: var(--esp-3); margin-top: var(--esp-2);
+  }
+  .cat-code {
+    font-family: var(--fonte-mono); font-size: var(--texto-xs);
+    background: var(--fundo-suave); border: 1px solid var(--borda);
+    border-radius: var(--raio-sm); padding: 2px 7px; color: var(--texto);
+  }
+  .cat-demo { margin-top: var(--esp-5); }
+
+  /* ===========================================================================
+     BLOCOS. Daqui para baixo é o que você copia.
+     =========================================================================== */
+
+  /* BLOCO: numeros-animados
+     Números grandes que sobem de 0 até o valor quando entram na tela. */
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--esp-5); }
+  .numero-valor { font-size: var(--texto-3xl); font-weight: 700; line-height: 1.1; color: var(--acao); }
+  .numero-rotulo { font-size: var(--texto-sm); color: var(--texto-suave); margin-top: var(--esp-1); }
+
+  /* BLOCO: painel
+     Janela de navegador escura com um painel dentro. Serve para mostrar
+     "um sistema funcionando" sem precisar de sistema nenhum. */
+  .painel { background: var(--fundo-escuro); border-radius: var(--raio-lg); overflow: hidden; box-shadow: var(--sombra-md); }
+  .painel-barra { display: flex; align-items: center; gap: var(--esp-2); padding: var(--esp-3) var(--esp-4); background: rgba(255,255,255,.05); }
+  .painel-ponto { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.2); }
+  .painel-url { flex: 1; text-align: center; font-family: var(--fonte-mono); font-size: var(--texto-xs); color: rgba(255,255,255,.4); }
+  .painel-corpo { padding: var(--esp-5); color: var(--neutro-0); }
+  .painel-titulo { font-size: var(--texto-xs); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.45); margin: 0 0 var(--esp-3); }
+  .painel .numero-valor { color: var(--neutro-0); font-size: var(--texto-xl); }
+  .painel .numero-rotulo { color: rgba(255,255,255,.45); }
+
+  /* BLOCO: status
+     Grade de etiquetas com estado. Serve para "10 lojas, 2 com problema". */
+  .status-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: var(--esp-2); }
+  .status-item {
+    font-size: var(--texto-xs); text-align: center; padding: var(--esp-2) var(--esp-1);
+    border-radius: var(--raio-sm); background: rgba(255,255,255,.06);
+    color: rgba(255,255,255,.75); border: 1px solid rgba(255,255,255,.08);
+  }
+  .status-item.atencao { background: color-mix(in srgb, var(--atencao-500) 22%, transparent); border-color: var(--atencao-500); color: var(--neutro-0); }
+  .status-item.erro    { background: color-mix(in srgb, var(--erro-500) 22%, transparent); border-color: var(--erro-500); color: var(--neutro-0); }
+
+  /* BLOCO: ao-vivo
+     Lista que aparece linha a linha, com um ponto pulsando. Serve para
+     dar sensação de "está acontecendo agora". */
+  .aovivo-topo { display: flex; align-items: center; gap: var(--esp-2); margin-bottom: var(--esp-3); }
+  .pulso { width: 8px; height: 8px; border-radius: 50%; background: var(--erro-500); animation: pulso 1.8s infinite; }
+  @keyframes pulso {
+    0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--erro-500) 55%, transparent); }
+    70%  { box-shadow: 0 0 0 8px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+  .aovivo-linha {
+    display: flex; gap: var(--esp-3); font-size: var(--texto-sm);
+    padding: var(--esp-2) 0; border-top: 1px solid rgba(255,255,255,.08);
+    color: rgba(255,255,255,.8);
+  }
+  .aovivo-hora { font-family: var(--fonte-mono); font-size: var(--texto-xs); color: rgba(255,255,255,.4); font-variant-numeric: tabular-nums; }
+
+  /* BLOCO: celular
+     Conversa de WhatsApp simulada, com as mensagens aparecendo uma a uma. */
+  .celular { width: 100%; max-width: 300px; margin: 0 auto; background: var(--neutro-900); border-radius: 28px; padding: 8px; box-shadow: var(--sombra-md); } /* ds-livre: moldura de celular, geometria do aparelho e nao da marca */
+  .celular-tela { background: var(--fundo-cartao); border-radius: 21px; /* ds-livre: tela dentro da moldura, acompanha o aparelho */ overflow: hidden; display: flex; flex-direction: column; height: 440px; }
+  .celular-topo { background: var(--acao); color: var(--texto-na-acao); display: flex; align-items: center; gap: var(--esp-3); padding: var(--esp-3) var(--esp-4); }
+  .celular-avatar { width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.25); display: grid; place-items: center; font-size: var(--texto-xs); font-weight: 700; }
+  .celular-nome { font-size: var(--texto-sm); font-weight: 600; line-height: 1.2; }
+  .celular-status { font-size: var(--texto-xs); opacity: .75; }
+  .celular-corpo { flex: 1; overflow-y: auto; padding: var(--esp-4) var(--esp-3); background: var(--fundo); display: flex; flex-direction: column; gap: var(--esp-3); }
+  .balao { max-width: 86%; padding: var(--esp-3); border-radius: var(--raio-md); font-size: var(--texto-sm); line-height: 1.5; background: var(--fundo-cartao); border: 1px solid var(--borda); align-self: flex-start; }
+  .balao.meu { align-self: flex-end; background: var(--fundo-suave); border-color: var(--borda-forte); }
+  .balao-hora { display: block; text-align: right; font-size: 10px; color: var(--texto-suave); margin-top: var(--esp-1); }
+  .digitando { display: flex; gap: 4px; align-items: center; }
+  .digitando span { width: 6px; height: 6px; border-radius: 50%; background: var(--texto-suave); animation: pula 1.2s infinite; }
+  .digitando span:nth-child(2) { animation-delay: .15s; }
+  .digitando span:nth-child(3) { animation-delay: .3s; }
+  @keyframes pula {
+    0%, 80%, 100% { transform: translateY(0); opacity: .35; }
+    40%           { transform: translateY(-4px); opacity: 1; }
+  }
+
+  /* BLOCO: fluxo
+     Etapas ligadas com uma partícula andando entre elas. Serve para mostrar
+     "isto roda sozinho, do começo ao fim". */
+  .fluxo { position: relative; display: flex; align-items: center; justify-content: space-between; gap: var(--esp-3); padding: var(--esp-5) 0; }
+  .fluxo::before { content: ""; position: absolute; left: 4%; right: 4%; top: 50%; height: 2px; background: var(--borda); }
+  .fluxo-no { position: relative; background: var(--fundo-cartao); border: 1px solid var(--borda-forte); border-radius: var(--raio-pill); padding: var(--esp-2) var(--esp-4); font-size: var(--texto-sm); font-weight: 600; }
+  .fluxo-particula { position: absolute; top: calc(50% - 4px); width: 8px; height: 8px; border-radius: 50%; background: var(--acao); animation: anda 3.2s linear infinite; }
+  @keyframes anda {
+    0%   { left: 3%;  opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { left: 96%; opacity: 0; }
+  }
+
+  /* BLOCO: cartoes
+     Grade de cartões que entram com fade quando aparecem na tela. */
+  .cartoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--esp-4); }
+  .cartao { background: var(--fundo-cartao); border: 1px solid var(--borda); border-radius: var(--raio-md); padding: var(--esp-5); }
+
+  /* BLOCO: tabela
+     Tabela com etiqueta de resultado colorida. */
+  .rolagem { overflow-x: auto; }
+  table.dados { border-collapse: collapse; width: 100%; font-size: var(--texto-sm); min-width: 420px; }
+  table.dados th { text-align: left; font-size: var(--texto-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--texto-suave); font-weight: 600; padding: var(--esp-2) var(--esp-4) var(--esp-2) 0; border-bottom: 1px solid var(--borda-forte); }
+  table.dados td { padding: var(--esp-3) var(--esp-4) var(--esp-3) 0; border-bottom: 1px solid var(--borda); }
+  .etiqueta { font-size: var(--texto-xs); font-weight: 600; padding: 2px 9px; border-radius: var(--raio-pill); white-space: nowrap; }
+  .etiqueta.ok      { background: color-mix(in srgb, var(--ok-500) 16%, transparent); color: var(--ok-500); }
+  .etiqueta.atencao { background: color-mix(in srgb, var(--atencao-500) 18%, transparent); color: var(--atencao-500); }
+  .etiqueta.erro    { background: color-mix(in srgb, var(--erro-500) 16%, transparent); color: var(--erro-500); }
+
+  /* Estado inicial de tudo que aparece no scroll. O JS lá embaixo remove.
+     Se o JS não rodar, o conteúdo aparece mesmo assim: nunca deixe algo
+     depender de JS para ser lido. */
+  [data-aparece] { opacity: 0; transform: translateY(8px); transition: opacity .45s ease, transform .45s ease; }
+  [data-aparece].visivel { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-aparece] { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="cat-top cat-wrap">
+  <p class="t-etiqueta">Catálogo</p>
+  <h1>Blocos prontos</h1>
+  <p>
+    Cada bloco abaixo já funciona. Para usar um deles, peça ao Claude Code:
+    <span class="cat-code">quero o bloco do celular com chat na minha página</span>.
+    Ele copia o HTML, o CSS e o JS necessários e adapta o conteúdo.
+  </p>
+  <p class="t-apoio">
+    Tudo aqui funciona sem internet e sem servidor. As cores vêm do
+    <span class="cat-code">design-system/tokens.css</span>, então quando você rodar
+    <span class="cat-code">/design-system</span> os blocos passam a usar a sua marca sozinhos.
+  </p>
+</header>
+
+<main class="cat-wrap">
+
+  <!-- ===================================================================== -->
+  <section class="cat-item">
+    <div class="cat-meta">
+      <h2>Números que sobem</h2>
+      <p class="cat-use">Use quando quiser provar escala: quantidade atendida, tempo economizado, valor recuperado.</p>
+      <p class="t-apoio">
+        Você escreve <span class="cat-code">data-count="2138"</span> no elemento. O número sobe de
+        zero até lá quando a pessoa rola até ele. <span class="cat-code">data-suffix="%"</span> e
+        <span class="cat-code">data-decimals="1"</span> são opcionais.
+      </p>
+    </div>
+    <div class="cat-demo">
+      <!-- BLOCO: numeros-animados -->
+      <div class="numeros">
+        <div>
+          <div class="numero-valor" data-count="2138">0</div>
+          <div class="numero-rotulo">pedidos processados</div>
+        </div>
+        <div>
+          <div class="numero-valor" data-count="94" data-suffix="%">0</div>
+          <div class="numero-rotulo">resolvidos sem humano</div>
+        </div>
+        <div>
+          <div class="numero-valor" data-count="3.4" data-decimals="1" data-suffix="h">0</div>
+          <div class="numero-rotulo">economizadas por dia</div>
+        </div>
+      </div>
+      <!-- /BLOCO -->
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section class="cat-item">
+    <div class="cat-meta">
+      <h2>Painel funcionando</h2>
+      <p class="cat-use">Use quando quiser mostrar um sistema em operação, sem ter o sistema. Junta o painel, os números e a grade de status.</p>
+    </div>
+    <div class="cat-demo">
+      <!-- BLOCO: painel -->
+      <div class="painel">
+        <div class="painel-barra">
+          <span class="painel-ponto"></span><span class="painel-ponto"></span><span class="painel-ponto"></span>
+          <span class="painel-url">painel.suaempresa.com.br</span>
+        </div>
+        <div class="painel-corpo">
+          <p class="painel-titulo">Hoje</p>
+          <div class="numeros">
+            <div><div class="numero-valor" data-count="412">0</div><div class="numero-rotulo">atendimentos</div></div>
+            <div><div class="numero-valor" data-count="8">0</div><div class="numero-rotulo">aguardando</div></div>
+            <div><div class="numero-valor" data-count="2">0</div><div class="numero-rotulo">atrasados</div></div>
+          </div>
+
+          <p class="painel-titulo">Unidades</p>
+          <!-- BLOCO: status -->
+          <div class="status-grade">
+            <div class="status-item">Centro</div>
+            <div class="status-item">Norte</div>
+            <div class="status-item atencao">Sul</div>
+            <div class="status-item">Leste</div>
+            <div class="status-item erro">Oeste</div>
+            <div class="status-item">Litoral</div>
+          </div>
+          <!-- /BLOCO -->
+
+          <!-- BLOCO: ao-vivo -->
+          <p class="painel-titulo" style="margin-top:var(--esp-5)">Agora</p>
+          <div class="aovivo-topo">
+            <span class="pulso"></span>
+            <span class="t-apoio" style="color:rgba(255,255,255,.55)">atualizando em tempo real</span>
+          </div>
+          <div data-aparece data-atraso="0"   class="aovivo-linha"><span class="aovivo-hora">14:02</span><span>Pedido 8841 confirmado</span></div>
+          <div data-aparece data-atraso="500" class="aovivo-linha"><span class="aovivo-hora">14:03</span><span>Unidade Sul acima da fila esperada</span></div>
+          <div data-aparece data-atraso="1000" class="aovivo-linha"><span class="aovivo-hora">14:05</span><span>Reposição solicitada automaticamente</span></div>
+          <!-- /BLOCO -->
+        </div>
+      </div>
+      <!-- /BLOCO -->
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section class="cat-item">
+    <div class="cat-meta">
+      <h2>Celular com conversa</h2>
+      <p class="cat-use">Use quando a prova for um atendimento: alguém pergunta e é resolvido na conversa. Não use para falar de dado ou relatório: aí o painel é o bloco certo.</p>
+      <p class="t-apoio">
+        O <span class="cat-code">data-reveal</span> no corpo faz as mensagens aparecerem uma a uma,
+        como numa conversa de verdade.
+      </p>
+    </div>
+    <div class="cat-demo">
+      <!-- BLOCO: celular -->
+      <div class="celular">
+        <div class="celular-tela">
+          <div class="celular-topo">
+            <div class="celular-avatar">SE</div>
+            <div>
+              <div class="celular-nome">Sua Empresa</div>
+              <div class="celular-status">online</div>
+            </div>
+          </div>
+          <div class="celular-corpo" data-reveal>
+            <div class="balao">Oi! Queria saber se vocês entregam no Centro hoje.<span class="balao-hora">14:02</span></div>
+            <div class="balao meu">Entregamos sim. Para o Centro, o próximo horário é às 16h.<span class="balao-hora">14:02</span></div>
+            <div class="balao"><div class="digitando"><span></span><span></span><span></span></div></div>
+            <div class="balao meu">Reservei uma vaga nesse horário. Confirma para você?<span class="balao-hora">14:03</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- /BLOCO -->
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section class="cat-item">
+    <div class="cat-meta">
+      <h2>Fluxo que roda sozinho</h2>
+      <p class="cat-use">Use quando quiser mostrar que algo acontece de ponta a ponta sem ninguém empurrar.</p>
+    </div>
+    <div class="cat-demo">
+      <!-- BLOCO: fluxo -->
+      <div class="fluxo">
+        <span class="fluxo-particula"></span>
+        <span class="fluxo-no">Pedido chega</span>
+        <span class="fluxo-no">Confere estoque</span>
+        <span class="fluxo-no">Avisa o cliente</span>
+      </div>
+      <!-- /BLOCO -->
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section class="cat-item">
+    <div class="cat-meta">
+      <h2>Cartões que aparecem</h2>
+      <p class="cat-use">Use para os motivos pelos quais alguém deveria confiar em você. Três costuma ser o número certo: dois parece pouco, cinco ninguém lê.</p>
+    </div>
+    <div class="cat-demo">
+      <!-- BLOCO: cartoes -->
+      <div class="cartoes">
+        <article class="cartao" data-aparece data-atraso="0">
+          <h3>Atendimento que não dorme</h3>
+          <p class="t-apoio">Pedido feito às 2h da manhã é respondido às 2h da manhã.</p>
+        </article>
+        <article class="cartao" data-aparece data-atraso="120">
+          <h3>Nada se perde</h3>
+          <p class="t-apoio">Toda conversa fica registrada e ligada ao pedido certo.</p>
+        </article>
+        <article class="cartao" data-aparece data-atraso="240">
+          <h3>Some quando não precisa</h3>
+          <p class="t-apoio">Caso difícil vai para uma pessoa, com o histórico junto.</p>
+        </article>
+      </div>
+      <!-- /BLOCO -->
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <section class="cat-item">
+    <div class="cat-meta">
+      <h2>Tabela com resultado</h2>
+      <p class="cat-use">Use quando a prova for comparação: combinado contra realizado, antes contra depois.</p>
+    </div>
+    <div class="cat-demo">
+      <!-- BLOCO: tabela -->
+      <div class="rolagem">
+        <table class="dados">
+          <thead><tr><th>Etapa</th><th>Antes</th><th>Agora</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>Primeira resposta</td><td>4h12</td><td>40s</td><td><span class="etiqueta ok">resolvido</span></td></tr>
+            <tr><td>Confirmação de estoque</td><td>manual</td><td>automática</td><td><span class="etiqueta ok">resolvido</span></td></tr>
+            <tr><td>Casos difíceis</td><td>sem registro</td><td>com histórico</td><td><span class="etiqueta atencao">em andamento</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /BLOCO -->
+    </div>
+  </section>
+
+</main>
+
+<footer class="cat-wrap" style="padding-block: var(--esp-7) var(--esp-9)">
+  <p class="t-apoio">
+    Regra que vale para todos: anime só o que simula algo funcionando. Movimento que é só enfeite
+    cansa e faz a página parecer amadora.
+  </p>
+</footer>
+
+<!-- =========================================================================
+     JS DOS BLOCOS. Copie junto se usar data-count, data-reveal ou data-aparece.
+     Não depende de nada externo e funciona abrindo o arquivo com dois cliques.
+     ========================================================================= -->
+<script>
+(function () {
+  var semMovimento = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* --- data-count: número que sobe de 0 até o valor ao entrar na tela --- */
+  document.querySelectorAll("[data-count]").forEach(function (el) {
+    var alvo = parseFloat(el.getAttribute("data-count"));
+    var casas = parseInt(el.getAttribute("data-decimals") || "0", 10);
+    var sufixo = el.getAttribute("data-suffix") || "";
+
+    function escreve(v) {
+      var txt = casas > 0
+        ? v.toFixed(casas).replace(".", ",")
+        : Math.round(v).toLocaleString("pt-BR");
+      el.textContent = txt + sufixo;
+    }
+    if (semMovimento) { escreve(alvo); return; }
+
+    var inicio = null;
+    function passo(ts) {
+      if (!inicio) inicio = ts;
+      var p = Math.min((ts - inicio) / 1400, 1);
+      escreve(alvo * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(passo);
+    }
+    var obs = new IntersectionObserver(function (ents) {
+      ents.forEach(function (e) {
+        if (e.isIntersecting) { requestAnimationFrame(passo); obs.disconnect(); }
+      });
+    }, { threshold: .4 });
+    obs.observe(el);
+  });
+
+  /* --- data-reveal: filhos aparecem um a um, como mensagens chegando --- */
+  document.querySelectorAll("[data-reveal]").forEach(function (caixa) {
+    var itens = Array.prototype.slice.call(caixa.children);
+    if (semMovimento) return;
+    itens.forEach(function (b) {
+      b.style.opacity = 0;
+      b.style.transform = "translateY(6px)";
+      b.style.transition = "opacity .4s ease, transform .4s ease";
+    });
+    var i = 0;
+    function mostra() {
+      if (i >= itens.length) return;
+      itens[i].style.opacity = 1;
+      itens[i].style.transform = "none";
+      i++;
+      setTimeout(mostra, 550);
+    }
+    var obs = new IntersectionObserver(function (ents) {
+      ents.forEach(function (e) {
+        if (e.isIntersecting) { mostra(); obs.disconnect(); }
+      });
+    }, { threshold: .3 });
+    obs.observe(caixa);
+  });
+
+  /* --- data-aparece: entra com fade ao chegar na tela. data-atraso escalona --- */
+  var alvos = document.querySelectorAll("[data-aparece]");
+  if (semMovimento) {
+    alvos.forEach(function (el) { el.classList.add("visivel"); });
+  } else {
+    var obs = new IntersectionObserver(function (ents, o) {
+      ents.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var atraso = parseInt(e.target.getAttribute("data-atraso") || "0", 10);
+        setTimeout(function () { e.target.classList.add("visivel"); }, atraso);
+        o.unobserve(e.target);
+      });
+    }, { threshold: .15 });
+    alvos.forEach(function (el) { obs.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+# Credenciais. NUNCA remova estas linhas.
+# O .env guarda o token da Vercel. Se ele for enviado ao GitHub, o token está publicado, não apenas
+# exposto: existem robôs que varrem repositórios procurando credencial, e o prazo é de minutos.
+.env
+.env.*
+!.env.example
+
+# Estado local da Vercel. Aponta esta pasta para um projeto específico numa conta específica.
+# Se for enviado, quem clonar publica no projeto errado sem perceber.
+.vercel/
+
+# Dependências e lixo de sistema.
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Rascunho em texto claro de página privada (proposta de cliente, apresentação). O que é
+# commitado é sempre a versão protegida por código, gerada por scripts/pin.js. O mapa
+# clientes/<slug>/PAGINAS.md continua sendo commitado normalmente: só o conteúdo em texto claro
+# dentro de privado/ fica de fora.
+clientes/*/privado/
