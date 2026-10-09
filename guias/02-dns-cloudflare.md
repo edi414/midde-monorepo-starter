@@ -2,10 +2,12 @@
 
 Este guia troca o `minha-landing-abc123.vercel.app` por algo como `lp.suaempresa.com.br`.
 
-> **Este passo não é feito ao vivo na sessão, e não é feito pelo Claude Code.** Mexer em DNS é a
-> única coisa deste material que pode derrubar algo que não tem nada a ver com a sua landing,
-> inclusive o e-mail da empresa. Quem executa é quem já tem acesso ao Cloudflare e responde por ele.
-> Este guia existe para essa pessoa ter o passo a passo exato.
+> **O registro de DNS em si, no Cloudflare (passo 2), não é feito ao vivo na sessão, e não é feito
+> pelo Claude Code, nunca, sob nenhuma confirmação.** Mexer em DNS é a única coisa deste material
+> que pode derrubar algo que não tem nada a ver com a sua landing, inclusive o e-mail da empresa.
+> Quem cria o registro é quem já tem acesso ao Cloudflare e responde por ele. O passo 1 (registrar o
+> domínio do lado da Vercel) é diferente: esse o Claude Code pode fazer, porque fica contido
+> naquele projeto e é reversível sem afetar nada fora dele.
 
 > **Você faz isto uma única vez, nunca por cliente.** O subdomínio é seu, não do cliente: cada
 > cliente novo ganha um subcaminho por baixo dele (`seudominio.com.br/<hash>/`), resolvido pela
@@ -29,17 +31,39 @@ funcionar.
 
 ---
 
-## Passo 1: adicionar o domínio no painel da Vercel
+## Passo 1: registrar o domínio no projeto da Vercel
 
-1. Abra o projeto na Vercel, vá em **Settings** e depois em **Domains**.
-2. Clique em **Add Domain** e digite o subdomínio completo, por exemplo `lp.suaempresa.com.br`.
-3. A Vercel vai mostrar o registro que você precisa criar. **Copie o valor que aparece na tela.**
+**Prompt para colar no Claude Code:**
 
-> **Não copie um valor de tutorial da internet.** Em alguns projetos a Vercel pede um CNAME genérico
-> (testado de verdade: `cname.vercel-dns.com.`), mas em outros pede um destino próprio daquele
-> projeto, com cara de `d1d4fc829fe7bc7c.vercel-dns-017.com`. Os dois formatos existem. O valor
-> certo é sempre o que o painel do **seu** projeto está mostrando, nunca o que você viu num
-> tutorial ou neste guia.
+> Quero usar o endereço `lp.suaempresa.com.br` no lugar do `.vercel.app`. Rode
+> `scripts/preparar-dominio.js` com ele, e me mostre exatamente o que sair: é o que eu vou colocar
+> no Cloudflare.
+
+**O que você deve ver na tela:**
+
+```
+Domínio "lp.suaempresa.com.br" registrado no projeto da Vercel.
+
+Configure isto no Cloudflare (DNS > Add record), com a nuvem CINZA (DNS only):
+
+  Type:   CNAME
+  Name:   lp
+  Target: cname.vercel-dns.com.
+
+Depois de criar o registro, a propagação leva de minutos a algumas horas.
+```
+
+Guarde esses três valores (Type, Name, Target): é exatamente o que você vai colar no Cloudflare, no
+próximo passo.
+
+> **Se preferir fazer isso clicando, em vez de pelo Claude Code:** Settings do projeto na Vercel →
+> **Domains** → **Add Domain** → digite o subdomínio. A tela mostra o mesmo valor que o script
+> imprime.
+
+> **Não copie um valor de tutorial da internet, nem o exemplo acima.** Em alguns projetos a Vercel
+> pede um CNAME genérico (testado de verdade: `cname.vercel-dns.com.`), mas em outros pede um
+> destino próprio daquele projeto, com cara de `d1d4fc829fe7bc7c.vercel-dns-017.com`. Os dois
+> formatos existem. O valor certo é sempre o que apareceu **para o seu domínio**, nesta etapa.
 
 ---
 
@@ -49,9 +73,9 @@ No painel do Cloudflare, escolha o domínio, vá em **DNS** e depois em **Add re
 
 | Campo | O que preencher |
 |---|---|
-| Type | `CNAME` |
-| Name | só a parte da frente, por exemplo `lp` (não o endereço inteiro) |
-| Target | o valor que você copiou do painel da Vercel |
+| Type | o `Type` que saiu no passo 1 (quase sempre `CNAME`) |
+| Name | o `Name` que saiu no passo 1 |
+| Target | o `Target` que saiu no passo 1 |
 | Proxy status | **DNS only** (a nuvem precisa ficar **cinza**, não laranja) |
 | TTL | Auto |
 

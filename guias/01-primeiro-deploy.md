@@ -53,23 +53,18 @@ claude
 O Edivaldo te envia um token da Vercel por um canal separado do link do repositório. Ele é o único
 token que você vai usar, para todos os seus clientes: não tem um token por cliente neste modelo.
 
-**Antes de colar, leia [`04-seguranca-token.md`](04-seguranca-token.md).** São 2 minutos, e evita o
+**Antes de colar, leia [`04-seguranca-token.md`](04-seguranca-token.md).** Um minuto, e evita o
 erro mais caro deste material.
 
 **Prompt para colar no Claude Code:**
 
-> Crie o arquivo de credencial deste projeto copiando o modelo: rode `cp .env.example .env`. Depois
-> me diga para eu abrir o `.env` num editor e colar o token que recebi, e confirme para mim que o
-> `.env` já está no `.gitignore` e portanto nunca vai para o GitHub. Não me peça o valor do token
-> aqui no chat, e não tente ler o conteúdo do `.env`.
+> Cria o `.env` a partir do `.env.example`. Eu vou abrir o arquivo e colar o token lá.
 
-Abra o `.env` no editor que preferir e cole o valor depois de `VERCEL_TOKEN=`, sem aspas e sem
-espaço. Salve e feche.
+Abra o `.env` num editor, cole o valor depois de `VERCEL_TOKEN=` (sem aspas, sem espaço), salve, e
+diga ao Claude Code que colou. Ele confere se ficou certo.
 
-> **Por que o Claude Code não lê esse arquivo:** ele está bloqueado de propósito nas configurações do
-> projeto. Assim o token nunca entra na conversa. O efeito colateral é que, se você errar ao colar,
-> ele não consegue te dizer o que está errado no arquivo. Confira você mesmo: uma linha só, começando
-> com `VERCEL_TOKEN=`.
+Só não cole esse mesmo token em outro lugar (grupo, print, outro arquivo): ele continua funcionando
+para quem o vir.
 
 ---
 
@@ -84,11 +79,8 @@ Dois caminhos, dependendo do que o Edivaldo te passou junto com o token:
 
 **Prompt para colar no Claude Code:**
 
-> Vincule esta pasta a um projeto na Vercel. Carregue a credencial do `.env` por shell, sem ler o
-> arquivo nem imprimir o valor. Se o Edivaldo já me passou o nome de um projeto, use
-> `vercel link --project [nome-do-projeto] --yes`. Se eu não te disse nenhum nome, crie o projeto
-> agora com `vercel link --yes`, sem `--project`. Depois confirme com `vercel whoami` e me diga a
-> qual projeto esta pasta ficou ligada.
+> Vincule esta pasta a um projeto na Vercel. Se o Edivaldo me passou um nome, use-o. Se não, crie um
+> projeto novo. Depois me diga a qual projeto ficou ligada.
 
 **O que você deve ver na tela** (o nome muda conforme o caso):
 
@@ -98,13 +90,8 @@ vercel link --yes
 ✅  Linked to sua-conta/minha-landing (created .vercel)
 ```
 
-> **Por que isso só acontece uma vez.** A partir de agora, `.vercel/project.json` guarda o vínculo
-> desta pasta com aquele projeto. O Claude Code nunca cria um segundo projeto depois disso: ele
-> confere esse arquivo antes de decidir.
-
-> **Nunca deixe criar um projeto novo depois que já existe um vínculo.** Se criar, você acaba com
-> dois projetos, e o link que já foi enviado para alguém continua no ar apontando para a versão
-> velha, sem ninguém perceber.
+Isso acontece **uma vez só**. Da próxima vez (com um cliente novo, por exemplo), o Claude Code já
+sabe que esta pasta está ligada, e não cria outro projeto.
 
 ---
 

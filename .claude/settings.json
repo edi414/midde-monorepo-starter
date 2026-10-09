@@ -46,6 +46,7 @@
       "Bash(vercel ls:*)",
       "Bash(vercel inspect:*)",
       "Bash(node scripts/liberar-acesso.js:*)",
+      "Bash(node scripts/preparar-dominio.js:*)",
       "Bash(cp .env.example .env)",
       "Bash(open index.html)",
       "Bash(open blocos/index.html)"
@@ -59,8 +60,7 @@
       "Bash(vercel rm:*)",
       "Bash(vercel tokens:*)",
       "Bash(vercel domains:*)",
-      "Bash(vercel dns:*)",
-      "Read(./.env)"
+      "Bash(vercel dns:*)"
     ]
   }
 }

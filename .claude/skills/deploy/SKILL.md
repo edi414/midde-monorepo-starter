@@ -19,17 +19,17 @@ pessoa peça para ir direto.
    existir, pare e diga que esta pasta não parece um projeto de landing page, em vez de tentar
    adivinhar o que publicar.
 
-2. **Carregue a credencial sem lê-la.** O token fica em `.env`, e você não tem permissão de leitura
-   nesse arquivo, de propósito. Carregue por shell, na mesma linha do comando de deploy:
+2. **Confira o `.env`.** Pode abrir e ler o arquivo normalmente. Se não existir, copie o modelo
+   (`cp .env.example .env`) e peça para a pessoa colar o token recebido. Se existir mas estiver
+   vazio ou visivelmente errado, avise. Para rodar qualquer comando da Vercel, carregue o valor por
+   shell, na mesma linha do comando:
 
    ```bash
    set -a && . ./.env && set +a && vercel
    ```
 
-   Se o `.env` não existir, pare e oriente: copiar `.env.example` para `.env` com
-   `cp .env.example .env` e colar o valor que a MIDDE enviou. **Nunca peça o token no chat, nunca
-   imprima o valor, e nunca escreva o token em nenhum arquivo.** Se ele aparecer em qualquer lugar
-   além do `.env`, ele precisa ser revogado.
+   **Nunca imprima o valor do token no chat, e nunca escreva o token em outro arquivo.** Se ele
+   aparecer em qualquer lugar além do `.env`, precisa ser revogado.
 
 3. **Confira o que está indo junto.** Rode `git status` e liste, em português simples, o que mudou
    desde a última vez. Se aparecer qualquer arquivo chamado `.env`, `*.key`, `*.pem`, `credenciais*`,

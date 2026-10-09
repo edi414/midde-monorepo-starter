@@ -114,8 +114,11 @@ O Claude Code deve parar e perguntar antes de:
 7. **Publicar em produção.** Só prossiga com a resposta literal `sim, produção`. Um "ok", "pode ir"
    ou "manda" não vale. Motivo: o link de produção costuma já ter sido enviado a alguém, e não
    existe "desenviar".
-8. **Apontar ou alterar domínio e DNS.** Motivo: erro de DNS derruba tudo naquele domínio, inclusive
-   o e-mail da empresa, e a propagação faz o estrago durar horas.
+8. **Registrar um domínio no projeto da Vercel** (`scripts/preparar-dominio.js`). Motivo: ainda que
+   seja reversível, é uma mudança de configuração que afeta como o projeto é alcançado de fora.
+   **O registro de DNS em si, no Cloudflare, nunca é feito pelo Claude Code**, sob nenhuma
+   confirmação: erro de DNS derruba tudo naquele domínio, inclusive o e-mail da empresa, e a
+   propagação faz o estrago durar horas. Veja `guias/02-dns-cloudflare.md`.
 9. **Apagar ou renomear arquivo do projeto.** Motivo: é fácil quebrar a página sem perceber, e o
    sintoma aparece só depois, como tela em branco.
 10. **Trocar de conta na Vercel ou no GitHub.** Motivo: publicar no projeto errado é um erro
@@ -129,9 +132,10 @@ O Claude Code deve parar e perguntar antes de:
     pessoa é responsável pelo que vai ao ar, e só consegue ser responsável pelo que entendeu.
 13. **Mostre links isolados, em uma linha só**, nunca no meio de um parágrafo. Motivo: o link
     precisa ser clicado e conferido, não caçado dentro do texto.
-14. **Nunca peça, leia em voz alta, imprima ou escreva um token** em nenhum arquivo, nem no chat.
-    Se precisar da credencial, leia do `.env` e siga. Motivo: token que aparece em qualquer lugar
-    além do `.env` deve ser considerado queimado e precisa ser revogado.
+14. **Pode ler o `.env` para conferir ou ajudar a preencher o token.** O que não pode é imprimir o
+    valor no chat, nem escrevê-lo em outro arquivo. Motivo: um token que aparece fora do `.env`
+    (num commit, numa mensagem) continua utilizável por qualquer um que o veja, mesmo que o projeto
+    não tenha nada sensível.
 15. **Se algo falhar, pare e explique.** Não tente outra plataforma, não improvise um contorno e não
     resolva erro de permissão com `sudo`. Motivo: o contorno silencioso é o que transforma um erro
     pequeno em uma máquina quebrada de um jeito difícil de desfazer.

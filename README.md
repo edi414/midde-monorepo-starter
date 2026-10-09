@@ -96,6 +96,7 @@ clientes/<nome>/        um cliente seu: a marca dele e os rascunhos das apresent
 blocos/                 catálogo de blocos prontos, abre no navegador
 guias/                  os passo a passo, na ordem de uso
 scripts/pin.js          protege uma página com código, usado por /pagina-privada
+scripts/preparar-dominio.js  registra um endereço próprio no projeto da Vercel (guia 02)
 CLAUDE.md               as regras do projeto, que o Claude Code lê sozinho
 .env.example            modelo do arquivo de credencial (o de verdade nunca é enviado)
 ```

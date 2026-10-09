@@ -67,7 +67,6 @@ Acontece quando a pasta `.vercel` aponta para outro projeto, ou quando alguém r
 dentro da pasta errada. Confira em qual projeto você está antes de publicar:
 
 > Me diga em qual projeto da Vercel esta pasta está vinculada e com qual conta eu estou autenticado.
-> Carregue a credencial do `.env` por shell, sem ler o arquivo nem imprimir o valor.
 
 ---
 
