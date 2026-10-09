@@ -35,10 +35,11 @@ funcionar.
 2. Clique em **Add Domain** e digite o subdomínio completo, por exemplo `lp.suaempresa.com.br`.
 3. A Vercel vai mostrar o registro que você precisa criar. **Copie o valor que aparece na tela.**
 
-> **Não copie um valor de tutorial da internet.** Cada projeto da Vercel tem um destino de CNAME
-> próprio, com cara de `d1d4fc829fe7bc7c.vercel-dns-017.com`. O valor genérico que aparece em
-> tutoriais antigos pode não valer para o seu projeto. O valor certo é sempre o que o painel do
-> **seu** projeto está mostrando.
+> **Não copie um valor de tutorial da internet.** Em alguns projetos a Vercel pede um CNAME genérico
+> (testado de verdade: `cname.vercel-dns.com.`), mas em outros pede um destino próprio daquele
+> projeto, com cara de `d1d4fc829fe7bc7c.vercel-dns-017.com`. Os dois formatos existem. O valor
+> certo é sempre o que o painel do **seu** projeto está mostrando, nunca o que você viu num
+> tutorial ou neste guia.
 
 ---
 
